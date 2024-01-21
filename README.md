@@ -1,5 +1,21 @@
 # CodeIgniter 4 Application Starter
 
+<pre>
+
+
+    composer create-project codeigniter4/appstarter project-root
+   php spark shield:setup
+php spark migrate --all
+
+> php spark make:controller User --crud
+
+```bash
+php spark make:model ProductModel
+```
+
+</pre>
+
+
 ## What is CodeIgniter?
 
 CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
