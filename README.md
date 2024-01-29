@@ -12,7 +12,7 @@ php spark migrate --all
 ```bash
 php spark make:model ProductModel
 ```
-
+php spark  command:Listcontroller
 </pre>
 
 

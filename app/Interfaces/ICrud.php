@@ -1,4 +1,3 @@
-// application/Models/Interfaces/CrudInterface.php
 <?php
 
 namespace App\Interfaces;

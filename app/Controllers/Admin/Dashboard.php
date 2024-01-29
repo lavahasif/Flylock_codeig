@@ -5,34 +5,36 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Interfaces\ICrud;
+use App\Controllers\Admin\Admin_Controller;
 
 class Dashboard extends BaseController implements ICrud
 {
 
     public function index()
     {
-        // Only authenticated users can access this  
-        echo 'Admin dashboard';
+//die("==========");
+        return view('adminlte/pages/widgets.php');
+
+
     }
 
-
-    public function create()
+    public function create($data)
     {
-        // Implement the create logic
+        // TODO: Implement create() method.
     }
 
     public function read($id)
     {
-        // Implement the read logic
+        // TODO: Implement read() method.
     }
 
-    public function update($id)
+    public function update($id, $data)
     {
-        // Implement the update logic
+        // TODO: Implement update() method.
     }
 
     public function delete($id)
     {
-        // Implement the delete logic
+        // TODO: Implement delete() method.
     }
 }
