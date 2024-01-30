@@ -12,10 +12,14 @@ class Dashboard extends BaseController implements ICrud
 
     public function index()
     {
-//die("==========");
-        return view('adminlte/pages/widgets.php');
 
 
+        $data = array(
+            "pagetitle" => "Flying colour",
+            "footer" => array("name" => "Flying", "Version" => 1),
+            "sidebar" => array("menu" => [])
+        );
+        return view('adminlte/pages/widgets.php', $data);
     }
 
     public function create($data)
