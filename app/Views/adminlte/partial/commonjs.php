@@ -6,3 +6,4 @@
   <script src="<?= base_url('/js/adminlte.min.js') ?>"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="<?= base_url('/js/demo.js') ?>"></script>
+  <?= $this->renderSection('_js') ?>
