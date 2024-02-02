@@ -21,7 +21,7 @@ php spark db:seed LockSystemSeeder
 
 </pre>
 
-![Alt text](image.png)
+![Alt text](public/img/image.png)
 
 ## What is CodeIgniter?
 
