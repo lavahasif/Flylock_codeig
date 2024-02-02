@@ -12,7 +12,7 @@ class LockingTypeModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['lock_reason', 'is_active', 'delete'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,32 @@ class LockingTypeModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+
+
+    public function createUserType($data)
+    {
+        return $this->insert($data);
+    }
+
+    public function deleteUserType($id)
+    {
+        return $this->delete($id);
+    }
+
+    public function updateUserType($id, $data)
+    {
+        return $this->update($id, $data);
+    }
+
+    public function listUserTypes()
+    {
+        return $this->findAll();
+    }
+
+    public function searchUserTypes($keyword)
+    {
+        return $this->like('user_type', $keyword)->findAll();
+    }
 }

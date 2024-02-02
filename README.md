@@ -13,6 +13,12 @@ php spark migrate --all
 php spark make:model ProductModel
 ```
 php spark  command:Listcontroller
+ php spark migrate:create LockingTypes
+php spark make:seeder LockSystemSeeder
+php spark migrate
+
+php spark db:seed LockSystemSeeder
+
 </pre>
 
 
