@@ -22,12 +22,12 @@ class LockingTypeController extends BaseController
     public function index()
     {
 
+        $Isskipcssjs = array(
+            BOOTSTRAP_SCRIPT => false,
+            BOOTSTRAP_STYLESHEET =>  false
 
-        $data = array(
-            "pagetitle" => "Flying colour",
-            "footer" => array("name" => "Flying", "Version" => 1),
-            "sidebar" => array("menu" => [])
         );
+
         return view('adminlte/pages/lockingreason_view.php', $data);
     }
 

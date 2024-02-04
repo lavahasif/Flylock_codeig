@@ -92,3 +92,20 @@ define('EVENT_PRIORITY_NORMAL', 100);
  * @deprecated Use \CodeIgniter\Events\Events::PRIORITY_HIGH instead.
  */
 define('EVENT_PRIORITY_HIGH', 10);
+
+
+// easy handling css and jss avoiding version issue in future added this option
+
+
+// Script URLs
+define('JQUERY_SCRIPT', 'JQUERY_SCRIPT');
+define('BOOTSTRAP_SCRIPT', 'BOOTSTRAP_SCRIPT');
+define('ADMINLTE_SCRIPT',   'ADMINLTE_SCRIPT');
+define('CUSTOM_SCRIPT',   'CUSTOM_SCRIPT');
+define('ISSKIPCSSJS',   'ISSKIPCSSJS');
+
+// Stylesheet URLs
+define('FONTAWESOME_STYLESHEET', 'FONTAWESOME_STYLESHEET');
+define('IONICONS_STYLESHEET', 'IONICONS_STYLESHEET');
+define('BOOTSTRAP_STYLESHEET', 'BOOTSTRAP_STYLESHEET');
+define('CUSTOM_STYLESHEET',  'CUSTOM_STYLESHEET');
