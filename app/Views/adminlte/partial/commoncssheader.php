@@ -1,5 +1,12 @@
 <!-- this js applicable to entire application -->
-<title><?= $pagetitle  ?></title>
+<?php
+
+/** @var Page $Page */
+use App\Entities\Page;
+
+?>
+
+<title><?= $Page->pageTitle  ?></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Google Font: Source Sans Pro -->

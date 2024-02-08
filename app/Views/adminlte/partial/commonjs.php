@@ -1,6 +1,16 @@
 <!-- this js applicable to entire application -->
 
-<?php if (!isset($ISSKIPCSSJS) || ($ISSKIPCSSJS[JQUERY_SCRIPT] ?? false) === false) : ?>
+<?php
+
+/** @var Page $Page */
+use App\Entities\Page;
+
+var_dump($Page->isSkipCssJs->script->jquery);
+
+?>
+
+
+<?php if (!isset($Page) || ($Page->isSkipCssJs->script->jquery ?? false) === false) : ?>
     <!-- jQuery -->
     <script src="<?= base_url('/plugins/jquery/jquery.min.js') ?>"></script>
 <?php endif; ?>
@@ -19,7 +29,7 @@ endif; ?>
     <script src="<?= base_url('/js/adminlte.min.js') ?>"></script>
     <!-- AdminLTE for demo purposes -->
 <?php endif; ?>
-<?php if (!isset($ISSKIPCSSJS) || ($ISSKIPCSSJS[CUSTOM_SCRIPT] ?? false) === false) : ?>
+<?php if (!isset($ISSKIPCSSJS) || ($ISSKIPCSSJS[CUSTOM_SCRIPT] ?? null) === false) : ?>
     <!-- <script src="<?= base_url('/js/demo.js') ?>"></script> -->
 <?php endif; ?>
 

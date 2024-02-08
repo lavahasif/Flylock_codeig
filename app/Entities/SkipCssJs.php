@@ -3,7 +3,8 @@
 namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
-// Purpose of this class to avoid reuse old jquery and bootstrap any new pages
+// The objective of this class is to prevent the reuse of outdated versions of jQuery and Bootstrap across different pages.
+// If the 'yes' property is set, it indicates permission to hide the default jQuery and Bootstrap elements that are included in the main layout of the page.
 
 class SkipCssJs extends Entity
 {

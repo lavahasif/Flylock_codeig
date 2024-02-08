@@ -3,7 +3,10 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Entities\Page;
 use App\Entities\Response;
+use App\Entities\Script;
+use App\Entities\SkipCssJs;
 use App\Models\LockingTypeModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -25,8 +28,9 @@ class LockingTypeController extends BaseController
         $Isskipcssjs = array(
             BOOTSTRAP_SCRIPT => false,
             BOOTSTRAP_STYLESHEET =>  false
-
         );
+
+        $data = ["Page" => new Page(pageTitle:"Flying Colour Buissness setup",isSkipCssJs:new SkipCssJs(script: new Script(jquery: false)))];
 
         return view('adminlte/pages/lockingreason_view.php', $data);
     }
