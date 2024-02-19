@@ -1,0 +1,19 @@
+# The selected code is doing the following:
+
+# 1. RewriteEngine On - Turns on the rewrite engine, which allows mod_rewrite rules to be processed.
+
+# 2. RewriteCond %{HTTPS} !=on - Checks if the request is not using HTTPS.
+
+# 3. RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC] - Checks if the request is for a URL starting with /public/ using a case insensitive match. Captures the rest of the URL after /public/ into backreference %1. 
+
+# 4. RewriteRule ^ %1 [L,NE,R=302] - If the previous conditions are met, redirect the request to the captured backreference %1 with a 302 temporary redirect and stop processing rules. This will redirect http requests to https.
+
+# 5. RewriteRule ^((?!public/).*)$ public/$1 [L,NC] - Rewrites any request not starting with /public/ to prepend /public/. The negative lookahead (?!public/) excludes URLs already starting with /public/.
+
+# So in summary, this code redirects http requests to https, and internally rewrites requests to prepend /public/ for routing purposes.
+
+RewriteEngine On
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+    RewriteRule ^ %1 [L,NE,R=302]
+    RewriteRule ^((?!public/).*)$ public/$1 [L,NC]

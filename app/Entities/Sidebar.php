@@ -10,13 +10,19 @@ class Sidebar extends Entity
     public $selection_name;
     public $selection_index;
     public $selection_url;
+    public $sidebarname;
+    public $sidebarusername;
+    public $logo;
 
-    public function __construct(array $menu = null, string $selection_name = "Home", string $selection_url = "/admin", int $selection_index = 0)
+    public function __construct(array $menu = null, string $selection_name = "Home", string $selection_url = "/admin", int $selection_index = 0, string $sidebarusername = "", string $sidebarname = "Flying Colour", string $logo = "fly.png")
     {
         $this->menu = $menu ?? Menu::getMenu();
         $this->selection_name = $selection_name;
         $this->selection_index = $selection_index;
         $this->selection_url = $selection_url;
+        $this->sidebarusername = $sidebarusername;
+        $this->sidebarname = $sidebarname;
+        $this->logo = $logo;
     }
 }
 class Menu

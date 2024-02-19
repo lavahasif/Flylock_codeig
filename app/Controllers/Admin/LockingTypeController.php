@@ -7,6 +7,7 @@ use App\Entities\Header;
 use App\Entities\Page;
 use App\Entities\Response;
 use App\Entities\Script;
+use App\Entities\Sidebar;
 use App\Entities\SkipCssJs;
 use App\Models\LockingTypeModel;
 use CodeIgniter\API\ResponseTrait;
@@ -32,8 +33,9 @@ class LockingTypeController extends BaseController
             BOOTSTRAP_SCRIPT => false,
             BOOTSTRAP_STYLESHEET =>  false
         );
-
-        $data = ["Page" => new Page(header: new Header("Locking Reason", "/admin"), pageTitle: "Flying Colour Buissness setup", isSkipCssJs: new SkipCssJs(script: new Script(jquery: false)))];
+        $currentUser = auth()->user()->username;
+        // var_dump($currentUser->username);
+        $data = ["Page" => new Page(sidebar: new Sidebar(sidebarusername: $currentUser), header: new Header("Locking Reason", "/admin"), pageTitle: "Flying Colour Buissness setup", isSkipCssJs: new SkipCssJs(script: new Script(jquery: false)))];
 
         return view('adminlte/pages/lockingreason_view.php', $data);
     }
