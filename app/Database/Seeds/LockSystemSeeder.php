@@ -3,7 +3,7 @@
 namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
-
+// explain the code     
 class LockSystemSeeder extends Seeder
 {
     public function run()

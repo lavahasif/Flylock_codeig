@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Entities\Header;
 use App\Entities\Page;
 use App\Entities\Response;
 use App\Entities\Script;
@@ -11,6 +12,8 @@ use App\Models\LockingTypeModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\ResponseInterface;
 //different locking selection prayer meeting 
+
+//create document for this controller   
 class LockingTypeController extends BaseController
 {
     use ResponseTrait;
@@ -30,7 +33,7 @@ class LockingTypeController extends BaseController
             BOOTSTRAP_STYLESHEET =>  false
         );
 
-        $data = ["Page" => new Page(pageTitle:"Flying Colour Buissness setup",isSkipCssJs:new SkipCssJs(script: new Script(jquery: false)))];
+        $data = ["Page" => new Page(header: new Header("Locking Reason", "/admin"), pageTitle: "Flying Colour Buissness setup", isSkipCssJs: new SkipCssJs(script: new Script(jquery: false)))];
 
         return view('adminlte/pages/lockingreason_view.php', $data);
     }

@@ -127,7 +127,7 @@ helper('admin');
 
 <!-- dont touch -->
 
-
+<!-- write helloworld here in php   -->
 
 <?php $this->section('subcontent'); ?>
 <!-- User Type Modal -->
@@ -199,20 +199,21 @@ helper('admin');
   <!-- User Type Table -->
   <div class="row">
     <div class="col-lg-12">
-      <table class="table table-bordered table-striped" id="userTypeTable">
-        <thead>
-          <tr>
-            <th>User Type</th>
-            <th>Is Active</th>
-            <th>Delete</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Data will be dynamically populated via JavaScript -->
-        </tbody>
-      </table>
-
+      <div class="card">
+        <table class="table table-bordered table-striped" id="userTypeTable">
+          <thead>
+            <tr>
+              <th>User Type</th>
+              <th>Is Active</th>
+              <th>Delete</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Data will be dynamically populated via JavaScript -->
+          </tbody>
+        </table>
+      </div>
       <!-- Pagination Links -->
       <div id="paginationLinks" class="mt-3">
         <!-- Pagination links will be dynamically populated via JavaScript -->
@@ -230,3 +231,4 @@ helper('admin');
 
 
 <?php $this->endSection(); ?>
+<!-- write fibnocci -->

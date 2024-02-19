@@ -5,7 +5,7 @@
 /** @var Page $Page */
 use App\Entities\Page;
 
-var_dump($Page->isSkipCssJs->script->jquery);
+// var_dump($Page->isSkipCssJs->script->jquery);
 
 ?>
 
