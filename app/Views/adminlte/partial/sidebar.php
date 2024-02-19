@@ -49,11 +49,13 @@ use App\Entities\Sidebar;
 
           <li class="nav-item">
             <a href="<?= $nav_item->url ?>" class="nav-link">
-              <i class="nav-icon <?= $nav_item->icon ?>"></i>
-              <p>
+
+              <div class="sidebar-heading">
+                <i class="nav-icon <?= $nav_item->icon ?>"></i>
                 <?= $nav_item->sidebarName ?>
                 <i class="right fas fa-angle-left"></i>
-              </p>
+              </div>
+
             </a>
             <ul class="nav nav-treeview">
 
