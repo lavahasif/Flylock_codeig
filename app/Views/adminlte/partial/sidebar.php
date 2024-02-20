@@ -21,10 +21,10 @@ use App\Entities\Sidebar;
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <!-- <img src="/img/<?= $Page->sidebar->logo ?>" class="img-circle elevation-2" alt="User Image"> -->
+        <img src="/img/<?= $Page->sidebar->logo ?>" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block"><?= $Page->sidebar->sidebarusername ?></a>
+        <a href="#" class="d-block"><?= strtoupper($Page->sidebar->sidebarusername) ?></a>
       </div>
     </div>
 
@@ -50,13 +50,17 @@ use App\Entities\Sidebar;
           <li class="nav-item">
             <a href="<?= $nav_item->url ?>" class="nav-link">
 
-              <p>
-                <i class="nav-icon <?= $nav_item->icon ?>"></i>
+              <p class="sidebar-heading">
+                <i class="nav-icon <?= $nav_item->icon ?>" style="position: absolute; right: 10px;"></i>
                 <?php if (!$Page->sidebar_minimize) : ?>
-                  <?= $nav_item->sidebarName ?>
+                  <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    <?= $nav_item->sidebarName ?>
+                  </p>
+
                 <?php endif; ?>
-                <i class="right fas fa-angle-left"></i>
+                <!-- <i class="right fas fa-angle-left" ></i> -->
               </p>
+
 
             </a>
             <ul class="nav nav-treeview">
@@ -82,6 +86,7 @@ use App\Entities\Sidebar;
 
 
     <!-- /.sidebar-menu -->
+
   </div>
   <!-- /.sidebar -->
 </aside>

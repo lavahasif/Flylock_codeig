@@ -45,13 +45,14 @@ class Menu
     {
         return array(
             new Menu('Home', '/', 'fa fa-home'),
+            new Menu('Logging/Logout Report', '/', 'fa fa-clipboard'),
             new Menu('Locking Reason', '/', 'fa fa-lock', [
                 new Menu('Add', '/locking-reason/create', 'fa fa-plus'),
                 new Menu('Edit', '/locking-reason', 'fa fa-edit'),
                 new Menu('Report', '/report/locking-reason', 'fa fa-file')
             ]),
 
-            new Menu('Logging/Logout Report', '/', 'fa fa-clipboard'),
+
             new Menu('User Registration', '/', 'fa fa-user-plus'),
             new Menu('DepartMent Registration', '/', 'fa fa-building')
 

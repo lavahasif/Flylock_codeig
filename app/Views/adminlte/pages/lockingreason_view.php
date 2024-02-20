@@ -8,6 +8,7 @@ helper('admin');
 <!-- app\Views\adminlte\pages\widgets.php -->
 <?php $this->section('_css'); ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+<link rel="stylesheet" href="https:////cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
 <!-- add custom css -->
 
 <style>
@@ -35,6 +36,7 @@ helper('admin');
 <?php $this->section('_js'); ?>
 <!-- add custom js -->
 
+<script src="https:////cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
   // Initialize Select2 for the User Type field
@@ -71,8 +73,27 @@ helper('admin');
 
 <script>
   $(document).ready(function() {
+
+
+    let table = new DataTable('#userTypeTable', {
+      responsive: true,
+      language: {
+        loadingRecords: '<div class="spinner-border spinner-border-sm" role="status"></div> Loading...'
+      }
+    });
+
+
+
+    // Handle click event for the "Fetch Data" button
+    $('#fetchDataBtn').click(function() {
+      let callfromadd_flag = 2;
+      fetchUserTypes(1, callfromadd_flag);
+      // table.clear()
+    });
+
+
     // Function to fetch and display user types
-    function fetchUserTypes(page = 1) {
+    function fetchUserTypes(page = 1, flag = 0) {
       $.ajax({
         url: '<?= admin_url('lockingtype/list') ?>',
         type: 'GET',
@@ -82,23 +103,31 @@ helper('admin');
         },
         success: function(response) {
           // Clear existing table data
-          $('#userTypeTable tbody').empty();
+          table.clear();
 
           // Populate table with new data
+          var data = [];
           $.each(response.data, function(index, userType) {
-            var row = '<tr>' +
-              '<td>' + userType.lock_reason + '</td>' +
-              '<td>' + (userType.is_active ? 'Yes' : 'No') + '</td>' +
-              '<td>' + (userType.delete ? 'Yes' : 'No') + '</td>' +
-              '<td>' +
-              // Add any action buttons or links here
-              '</td>' +
-              '</tr>';
-            $('#userTypeTable tbody').append(row);
+            data.push([
+              userType.lock_reason,
+              userType.is_active ? 'Yes' : 'No',
+              userType.delete ? 'Yes' : 'No',
+              userType.action = `<div class="text-center">
+<a href="<?= admin_url('lockingtype/edit/') ?>${userType . id}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" title="Edit">
+  <i class="fas fa-pencil-alt"></i>
+</a>
+<a href="<?= admin_url('lockingtype/delete/') ?>${userType . id}" class="btn btn-danger btn-sm delete-button" data-bs-toggle="tooltip" title="Delete">
+  <i class="fas fa-trash"></i>  
+</a>  
+</div>`
+
+            ]);
           });
+          table.rows.add(data);
+          table.draw();
 
           // Update pagination links
-          $('#paginationLinks').html(response.paginationLinks);
+          // $('#paginationLinks').html(response.paginationLinks);
         },
         error: function(error) {
           console.error('Error fetching user types:', error);
@@ -106,13 +135,11 @@ helper('admin');
       });
     }
 
+
     // Fetch data when the page loads
     fetchUserTypes();
 
-    // Handle click event for the "Fetch Data" button
-    $('#fetchDataBtn').on('click', function() {
-      fetchUserTypes();
-    });
+
 
     // Handle click events for pagination links
     $('#paginationLinks').on('click', 'a', function(e) {
@@ -184,12 +211,25 @@ helper('admin');
 
 <div class="container mt-5">
   <div class="row mb-3">
-    <div class="col-lg-6">
+    <div class="col-md-9">
+    </div>
+
+    <div class="col-md-1">
+
+      <!-- Add a button to trigger fetching data -->
+      <button id="fetchDataBtn" class="btn btn-primary" data-toggle="tooltip" title="reload">
+        <i class="fa fa-spinner "></i></button>
+
+
+    </div>
+    <div class="col-md-2">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userTypeModal">
         Add Lock Reason
       </button>
     </div>
+
   </div>
+
 
 
 
@@ -199,34 +239,34 @@ helper('admin');
   <!-- User Type Table -->
   <div class="row">
     <div class="col-lg-12">
-      <div class="card">
-        <table class="table table-bordered table-striped" id="userTypeTable">
-          <thead>
-            <tr>
-              <th>User Type</th>
-              <th>Is Active</th>
-              <th>Delete</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Data will be dynamically populated via JavaScript -->
-          </tbody>
-        </table>
-      </div>
+
+
+      <table class="table table-bordered table-striped datatable" id="userTypeTable" style="width:100%">
+        <thead>
+          <tr>
+            <th>User Type</th>
+            <th>Is Active</th>
+            <th>Delete</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data will be dynamically populated via JavaScript -->
+        </tbody>
+      </table>
+
+
+
       <!-- Pagination Links -->
-      <div id="paginationLinks" class="mt-3">
-        <!-- Pagination links will be dynamically populated via JavaScript -->
-      </div>
+      <!-- <div id="paginationLinks" class="mt-3"> -->
+      <!-- Pagination links will be dynamically populated via JavaScript -->
+      <!-- </div> -->
 
-      <!-- Add a button to trigger fetching data -->
-      <button id="fetchDataBtn" class="btn btn-primary mt-3">Fetch Data</button>
     </div>
+
+
+
   </div>
-
-
-
-</div>
 </div>
 
 
