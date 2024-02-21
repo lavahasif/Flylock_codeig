@@ -8,7 +8,8 @@ helper('admin');
 <!-- app\Views\adminlte\pages\widgets.php -->
 <?php $this->section('_css'); ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
-<link rel="stylesheet" href="https:////cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
+<!-- <link rel="stylesheet" href="https:////cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css"> -->
+<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.0/datatables.min.css" rel="stylesheet">
 <!-- add custom css -->
 
 <style>
@@ -31,43 +32,47 @@ helper('admin');
   }
 </style>
 <?php $this->endSection(); ?>
-<?php $this->extend('adminlte/partial/sublayout'); ?>
+<?php $this->extend('admin/common/sublayout'); ?>
 
 <?php $this->section('_js'); ?>
 <!-- add custom js -->
+<!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
+<!-- <script src="https:////cdn.datatables.net/2.0.0/js/dataTables.min.js"></script> -->
 
-<script src="https:////cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.0/datatables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
   // Initialize Select2 for the User Type field
   $(document).ready(function() {
     // Fetch user types from the server (replace with your endpoint)
-    $.ajax({
-      url: '<?= admin_url('lockingtype/list') ?>', // Adjust the URL based on your routes
-      method: 'GET',
-      success: function(response) {
-        // Populate Select2 options with fetched user types
-        $('#usertype').select2({
-          data: response.data.map(function(userType) {
-            return {
-              id: userType.id,
-              text: userType.lock_reason
-            };
-          }),
+    //   $.ajax({
+    //     url: '<?= admin_url('lockingtype/list') ?>', // Adjust the URL based on your routes
+    //     method: 'GET',
+    //     success: function(response) {
+    //       // Populate Select2 options with fetched user types
+    //       $('#usertype').select2({
+    //         data: response.data.map(function(userType) {
+    //           return {
+    //             id: userType.id,
+    //             text: userType.lock_reason
+    //           };
+    //         }),
 
-          placeholder: 'Select User Type',
-          allowClear: true,
-        });
-      },
-      error: function(error) {
-        console.error(error.responseText);
-      }
-    });
+    //         placeholder: 'Select User Type',
+    //         allowClear: true,
+    //       });
+    //     },
+    //     error: function(error) {
+    //       console.error(error.responseText);
+    //     }
+    //   });
+    // });
+    // Enable Bootstrap tooltips
+    $(function() {
+      $('[data-bs-toggle="tooltip"]').tooltip()
+    })
   });
-  // Enable Bootstrap tooltips
-  $(function() {
-    $('[data-bs-toggle="tooltip"]').tooltip()
-  })
 </script>
 
 
@@ -75,12 +80,42 @@ helper('admin');
   $(document).ready(function() {
 
 
-    let table = new DataTable('#userTypeTable', {
+    let table = $('#userTypeTable').DataTable({
       responsive: true,
-      language: {
-        loadingRecords: '<div class="spinner-border spinner-border-sm" role="status"></div> Loading...'
-      }
+
+      pageLength: 10,
+      lengthMenu: [10, 25, 50, 75, 100],
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: "<?= admin_url('lockingtype/list') ?>",
+        type: 'POST',
+      },
     });
+
+    //   columns: [
+    //     // Define your DataTable columns here
+    //     {
+    //       data: 'lock_reason',
+    //       name: 'lock_reason'
+    //     },
+    //     {
+    //       data: 'is_active',
+    //       name: 'is_active'
+    //     },
+    //     {
+    //       data: 'isdel',
+    //       name: 'isdel'
+    //     },
+    //     // Add more columns as needed
+    //   ],
+    //   drawCallback: function(settings) {
+    //     // var pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+    //     // pagination.toggle(this.api().page.info().pages > 1);
+    //   }
+    // });
+
+    table.draw();
 
 
 
@@ -120,14 +155,10 @@ helper('admin');
   <i class="fas fa-trash"></i>  
 </a>  
 </div>`
-
             ]);
           });
           table.rows.add(data);
           table.draw();
-
-          // Update pagination links
-          // $('#paginationLinks').html(response.paginationLinks);
         },
         error: function(error) {
           console.error('Error fetching user types:', error);
@@ -137,7 +168,7 @@ helper('admin');
 
 
     // Fetch data when the page loads
-    fetchUserTypes();
+    // fetchUserTypes();
 
 
 
@@ -172,9 +203,9 @@ helper('admin');
           <!-- Usertype Field (Searchable Dropdown) -->
           <div class="mb-3">
             <label for="usertype" class="form-label">User Type</label>
-            <select class="form-select select2" id="usertype" name="usertype">
-              <!-- Options will be dynamically populated via JavaScript -->
-            </select>
+            <!-- Options will be dynamically populated via JavaScript -->
+            <input type="text" class="form-control" id="usertype" name="usertype" />
+
             <div class="form-text">Choose the type of user.</div>
           </div>
 
@@ -211,22 +242,22 @@ helper('admin');
 
 <div class="container mt-5">
   <div class="row mb-3">
-    <div class="col-md-9">
-    </div>
 
-    <div class="col-md-1">
-
-      <!-- Add a button to trigger fetching data -->
-      <button id="fetchDataBtn" class="btn btn-primary" data-toggle="tooltip" title="reload">
-        <i class="fa fa-spinner "></i></button>
-
-
-    </div>
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-5 col-lg-2">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userTypeModal">
         Add Lock Reason
       </button>
     </div>
+    <div class="col-md-9 col-sm-3">
+    </div>
+
+    <!-- <div class="col-md-1 col-sm-3 col-lg-1"> -->
+
+    <!-- Add a button to trigger fetching data -->
+    <!-- <button id="fetchDataBtn" class="btn btn-primary" data-toggle="tooltip" title="reload">
+        <i class="fa fa-spinner "></i></button> -->
+    <!-- </div> -->
+
 
   </div>
 
