@@ -7,7 +7,7 @@ use App\Entities\Page;
 //var_dump($Page->Header->heading);
 
 ?>
-<?php $this->extend('adminlte/partial/mainlayout'); ?>
+<?php $this->extend('admin/common/mainlayout'); ?>
 <?php $this->section('content'); ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

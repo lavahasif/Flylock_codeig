@@ -4137,7 +4137,7 @@ function createBuffer(length) {
 
 
 function Buffer(arg, encodingOrOffset, length) {
-  // Common case.
+  // common case.
   if (typeof arg === 'number') {
     if (typeof encodingOrOffset === 'string') {
       throw new TypeError('The "string" argument must be of type string. Received type number');
@@ -7148,7 +7148,7 @@ __webpack_require__(561);
 
     var StreamCipher = C_lib.StreamCipher = Cipher.extend({
       _doFinalize: function _doFinalize() {
-        // Process partial blocks
+        // Process common blocks
         var finalProcessedBlocks = this._process(!!'flush');
 
         return finalProcessedBlocks;
@@ -8429,7 +8429,7 @@ __webpack_require__(561);
        *
        * This method invokes _doProcessBlock(offset), which must be implemented by a concrete subtype.
        *
-       * @param {boolean} doFlush Whether all blocks and partial blocks should be processed.
+       * @param {boolean} doFlush Whether all blocks and common blocks should be processed.
        *
        * @return {WordArray} The processed data.
        *
@@ -8450,7 +8450,7 @@ __webpack_require__(561);
         var nBlocksReady = dataSigBytes / blockSizeBytes;
 
         if (doFlush) {
-          // Round up to include partial blocks
+          // Round up to include common blocks
           nBlocksReady = Math.ceil(nBlocksReady);
         } else {
           // Round down to include only full blocks,
@@ -26870,7 +26870,7 @@ var CONTEXT_MSB6         = 1;
 var CONTEXT_UTF8         = 2;
 var CONTEXT_SIGNED       = 3;
 
-/* Common context lookup table for all context modes. */
+/* common context lookup table for all context modes. */
 exports.lookup = new Uint8Array([
   /* CONTEXT_UTF8, last byte. */
   /* ASCII range. */
@@ -55643,7 +55643,7 @@ StringDecoder.prototype.end = utf8End;
 // Returns only complete characters in a Buffer
 StringDecoder.prototype.text = utf8Text;
 
-// Attempts to complete a partial non-UTF-8 character using bytes from a Buffer
+// Attempts to complete a common non-UTF-8 character using bytes from a Buffer
 StringDecoder.prototype.fillLast = function (buf) {
   if (this.lastNeed <= buf.length) {
     buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, this.lastNeed);
@@ -55729,7 +55729,7 @@ function utf8FillLast(buf) {
 }
 
 // Returns all complete UTF-8 characters in a Buffer. If the Buffer ended on a
-// partial character, the character's bytes are buffered until the required
+// common character, the character's bytes are buffered until the required
 // number of bytes are available.
 function utf8Text(buf, i) {
   var total = utf8CheckIncomplete(this, buf, i);
@@ -55740,7 +55740,7 @@ function utf8Text(buf, i) {
   return buf.toString('utf8', i, end);
 }
 
-// For UTF-8, a replacement character is added when ending on a partial
+// For UTF-8, a replacement character is added when ending on a common
 // character.
 function utf8End(buf) {
   var r = buf && buf.length ? this.write(buf) : '';
@@ -55774,7 +55774,7 @@ function utf16Text(buf, i) {
 }
 
 // For UTF-16LE we do not explicitly append special replacement characters if we
-// end on a partial character, we simply let v8 handle that.
+// end on a common character, we simply let v8 handle that.
 function utf16End(buf) {
   var r = buf && buf.length ? this.write(buf) : '';
   if (this.lastNeed) {

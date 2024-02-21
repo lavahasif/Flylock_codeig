@@ -13032,7 +13032,7 @@ var scale_linear = scale_linearbase.extend({
 		me.min = helpers$1.isFinite(me.min) && !isNaN(me.min) ? me.min : DEFAULT_MIN;
 		me.max = helpers$1.isFinite(me.max) && !isNaN(me.max) ? me.max : DEFAULT_MAX;
 
-		// Common base implementation to handle ticks.min, ticks.max, ticks.beginAtZero
+		// common base implementation to handle ticks.min, ticks.max, ticks.beginAtZero
 		me.handleTickRangeOptions();
 	},
 
@@ -13242,7 +13242,7 @@ var scale_logarithmic = core_scale.extend({
 		me.max = helpers$1.isFinite(me.max) ? me.max : null;
 		me.minNotZero = helpers$1.isFinite(me.minNotZero) ? me.minNotZero : null;
 
-		// Common base implementation to handle ticks.min, ticks.max
+		// common base implementation to handle ticks.min, ticks.max
 		this.handleTickRangeOptions();
 	},
 
@@ -13709,7 +13709,7 @@ var scale_radialLinear = scale_linearbase.extend({
 		me.min = (min === Number.POSITIVE_INFINITY ? 0 : min);
 		me.max = (max === Number.NEGATIVE_INFINITY ? 0 : max);
 
-		// Common base implementation to handle ticks.min, ticks.max, ticks.beginAtZero
+		// common base implementation to handle ticks.min, ticks.max, ticks.beginAtZero
 		me.handleTickRangeOptions();
 	},
 

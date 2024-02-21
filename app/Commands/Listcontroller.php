@@ -58,7 +58,7 @@ class Listcontroller extends BaseCommand
     {
         $controllers = [];
 
-        $files = glob(APPPATH . 'Controllers/Admin/*.php');
+        $files = glob(APPPATH . 'Controllers/admin/*.php');
 
         foreach ($files as $file) {
             $controller = basename($file, '.php');

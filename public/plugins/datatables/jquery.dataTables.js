@@ -6816,7 +6816,7 @@
 			return host[renderer[type]] || host._;
 		}
 		else if ( typeof renderer === 'string' ) {
-			// Common renderer - if there is one available for this type use it,
+			// common renderer - if there is one available for this type use it,
 			// otherwise use the default
 			return host[renderer] || host._;
 		}
@@ -8739,7 +8739,7 @@
 			$( _pluck( settings.aoData, 'anCells', column ) ).detach();
 		}
 	
-		// Common actions
+		// common actions
 		col.bVisible = vis;
 	};
 	

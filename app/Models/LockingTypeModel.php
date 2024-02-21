@@ -56,7 +56,12 @@ class LockingTypeModel extends Model
         return $this->update($id, $data);
     }
 
-    public function listUserTypes()
+    public function listUserTypes($limit = 10, $page = 1)
+    {
+        return $this->paginate($limit, $page);
+    }
+
+    public function listAllUserTypes()
     {
         return $this->findAll();
     }
@@ -64,5 +69,32 @@ class LockingTypeModel extends Model
     public function searchUserTypes($keyword)
     {
         return $this->like('user_type', $keyword)->findAll();
+    }
+
+    // Fetch records from the model based on the parameters
+    public function getLockingTypes($start, $length, $order_name, $order_dir, $search_value)
+    {
+        $query = $this->builder();
+        var_dump($query);
+        if ($search_value) {
+            $query->like('name', $search_value);
+        }
+
+        if ($order_name) {
+            $query->orderBy($order_name, $order_dir);
+        }
+
+        // Use CodeIgniter's built-in paginate method
+        return $query->get($length, $start)->getResult();
+    }
+
+
+    // Get total records count (without pagination)
+    public function getTotalLockingTypesCount()
+    {
+        // var_dump($this->builder()->where('delete', 0)->countAllResults());
+        $result  = (int)$this->builder()->where('delete', 0)->countAllResults();
+        // var_dump($result);
+        return $result;
     }
 }

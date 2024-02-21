@@ -13,7 +13,7 @@
 # So in summary, this code redirects http requests to https, and internally rewrites requests to prepend /public/ for routing purposes.
 
 RewriteEngine On
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
-    RewriteRule ^ %1 [L,NE,R=302]
-    RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+RewriteRule ^ %1 [L,NE,R=302]
+RewriteRule ^((?!public/).*)$ public/$1 [L,NC]

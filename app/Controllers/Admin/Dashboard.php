@@ -19,7 +19,7 @@ class Dashboard extends BaseController implements ICrud
             "footer" => array("name" => "Flying", "Version" => 1),
             "sidebar" => array("menu" => [])
         );
-        return view('adminlte/pages/lockingreason.php', $data);
+        return view('admin/pages/lockingreason.php', $data);
     }
 
     public function create($data)

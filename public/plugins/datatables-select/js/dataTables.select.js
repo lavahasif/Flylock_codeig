@@ -1122,7 +1122,7 @@ function i18n( label, def ) {
 	};
 }
 
-// Common events with suitable namespaces
+// common events with suitable namespaces
 function namespacedEvents ( config ) {
 	var unique = config._eventNamespace;
 

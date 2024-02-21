@@ -3,6 +3,7 @@
 <?php
 
 /** @var Page $Page */
+
 use App\Entities\Page;
 
 // var_dump($Page->isSkipCssJs->script->jquery);
@@ -30,7 +31,7 @@ endif; ?>
     <!-- AdminLTE for demo purposes -->
 <?php endif; ?>
 <?php if (!isset($ISSKIPCSSJS) || ($ISSKIPCSSJS[CUSTOM_SCRIPT] ?? null) === false) : ?>
-    <!-- <script src="<?= base_url('/js/demo.js') ?>"></script> -->
+    <!-- <script src="<?= base_url('/plugins/js/demo.js') ?>"></script> -->
 <?php endif; ?>
 
 

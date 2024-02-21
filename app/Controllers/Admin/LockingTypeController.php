@@ -12,6 +12,8 @@ use App\Entities\SkipCssJs;
 use App\Models\LockingTypeModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\ResponseInterface;
+use Exception;
+
 //different locking selection prayer meeting 
 
 //create document for this controller   
@@ -29,15 +31,12 @@ class LockingTypeController extends BaseController
     public function index()
     {
 
-        $Isskipcssjs = array(
-            BOOTSTRAP_SCRIPT => false,
-            BOOTSTRAP_STYLESHEET =>  false
-        );
+
         $currentUser = auth()->user()->username;
         // var_dump($currentUser->username);
-        $data = ["Page" => new Page(sidebar: new Sidebar(sidebarusername: $currentUser), header: new Header("Locking Reason", "/admin"), pageTitle: "Flying Colour Buissness setup", isSkipCssJs: new SkipCssJs(script: new Script(jquery: false)))];
+        $data = ["Page" => new Page(pageTitle: "Flying Colour Business setup", sidebar: new Sidebar(sidebarusername: $currentUser), isSkipCssJs: new SkipCssJs(script: new Script(jquery: false)), header: new Header("Locking Reason", "/admin"))];
 
-        return view('adminlte/pages/lockingreason_view.php', $data);
+        return view('admin/report/locking_reason_view.php', $data);
     }
 
     public function createUserType()
@@ -75,6 +74,48 @@ class LockingTypeController extends BaseController
         return $this->respond($responseEntity->toArray());
     }
 
+    public function list()
+    {
+
+        $draw = $this->request->getPost('draw');
+        $start = $this->request->getPost('start');
+        $length = $this->request->getPost('length');
+
+        // Get the order details
+        $order_column = $this->request->getPost('order')[0]['column'];
+        $order_dir = $this->request->getPost('order')[0]['dir'];
+        $order_name = $this->request->getPost('columns')[$order_column]['name'];
+
+        // Get the search value
+        $search_value = $this->request->getPost('search')['value'];
+        // Get total records count (without pagination)
+        try {
+            die($this->lockModel->getTotalLockingTypesCount());
+        } catch (Exception $e) {
+
+            var_dump($e);
+        }
+
+        $total_records = $this->lockModel->getTotalLockingTypesCount();
+
+        // Fetch records from the model based on the parameters
+        $records = $this->lockModel->getLockingTypes($start, $length, $order_name, $order_dir, $search_value);
+
+        die($records);
+
+        // Prepare the response
+        $response = array(
+            'draw' => $draw,
+            'recordsTotal' => $total_records,
+            'recordsFiltered' => $total_records,
+            'data' => $records,
+        );
+
+
+
+        // Send the JSON response
+        $this->respond()->setJSON($response);
+    }
     public function listUserTypes()
     {
 

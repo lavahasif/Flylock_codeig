@@ -38,7 +38,7 @@
             if (this.s.dt.settings()[0].oInit.scrollY === true) {
                 this.s.barWidth = this.s.dt.settings()[0].oBrowser.barWidth;
             }
-            // Common CSS for all blockers
+            // common CSS for all blockers
             var blockerCSS = {
                 'background-color': 'white',
                 'bottom': '0px',
